@@ -10,6 +10,7 @@ var largura float64
 var comprimento float64
 var altura float64
 var espessura float64
+var quantidade float64
 var arquivo string
 
 func main() {
@@ -21,6 +22,8 @@ func main() {
 	fmt.Scanln(&altura)
 	fmt.Print("Espessura: ")
 	fmt.Scanln(&espessura)
+	fmt.Print("Quantidade: ")
+	fmt.Scanln(&quantidade)
 	fmt.Print("Nome do arquivo: ")
 	fmt.Scanln(&arquivo)
 
@@ -40,20 +43,17 @@ func main() {
 	f.WriteString(fmt.Sprintf("Comprimento: %vcm\n\n", comprimento))
 	f.WriteString(fmt.Sprintf("Altura: %vcm\n\n", altura))
 	f.WriteString(fmt.Sprintf("Espessura: %vcm\n\n", espessura))
+	f.WriteString(fmt.Sprintf("Quantidade: %v un\n\n", quantidade))
 	f.WriteString("==================\n\n")
-	f.WriteString(fmt.Sprintf("Base: %vcm x %vcm\n\n", largura, comprimento))
-	f.WriteString(fmt.Sprintf("Lateral Esquerda: %vcm x %vcm\n\n", comprimento, altura))
-	f.WriteString(fmt.Sprintf("Lateral Direita: %vcm x %vcm\n\n", comprimento, altura))
-	f.WriteString(fmt.Sprintf("Lateral Frente: %vcm x %vcm\n\n", (largura + espessura), altura))
-	f.WriteString(fmt.Sprintf("Lateral Fundo: %vcm x %vcm\n\n", (largura + espessura), altura))
+	f.WriteString(fmt.Sprintf("Base: %vcm x %vcm - %v un\n\n", largura, comprimento, quantidade))
+	f.WriteString(fmt.Sprintf("Lateral D/E: %vcm x %vcm - %v un\n\n", comprimento, altura, (quantidade * 2)))
+	f.WriteString(fmt.Sprintf("Lateral F/F: %vcm x %vcm - %v un\n\n", comprimento, altura, (quantidade * 2)))
 	f.WriteString("CAPA =============\n\n")
-	f.WriteString(fmt.Sprintf("Tampa: %vcm x %vcm\n\n", (largura + 1.5), (comprimento + 1)))
-	f.WriteString(fmt.Sprintf("Fundo: %vcm x %vcm\n\n", (largura + 1.5), (comprimento + 1)))
-	f.WriteString(fmt.Sprintf("Lombada: %vcm x %vcm\n\n", (largura + 1.5), altura))
+	f.WriteString(fmt.Sprintf("Tampa: %vcm x %vcm - %v un\n\n", (largura + 1.5), (comprimento + 1), quantidade))
+	f.WriteString(fmt.Sprintf("Fundo: %vcm x %vcm - %v un\n\n", (largura + 1.5), (comprimento + 1), quantidade))
+	f.WriteString(fmt.Sprintf("Lombada: %vcm x %vcm - %v un\n\n", (largura + 1.5), altura, quantidade))
 	f.WriteString("ACABAMENTO =======\n\n")
-	f.WriteString(fmt.Sprintf("Interno Tampa: %vcm x %vcm\n\n", (largura + 1.5 - 0.5), (comprimento + 1 - 0.5)))
-	f.WriteString(fmt.Sprintf("Externo Lateral Direita: %vcm x %vcm\n\n", (comprimento + espessura), (altura - 0.1)))
-	f.WriteString(fmt.Sprintf("Externo Lateral Esquerda: %vcm x %vcm\n\n", (comprimento + espessura), (altura - 0.1)))
-	f.WriteString(fmt.Sprintf("Externo Lateral Frente: %.1fcm x %vcm\n\n", ((comprimento + espessura) - 0.1), (altura - 0.1)))
-	f.WriteString(fmt.Sprintf("Externo Lateral Fundo: %.1fcm x %vcm\n\n", ((comprimento + espessura) - 0.1), (altura - 0.1)))
+	f.WriteString(fmt.Sprintf("Interno Tampa: %vcm x %vcm - %v un\n\n", (largura + 1.5 - 0.5), (comprimento + 1 - 0.5), quantidade))
+	f.WriteString(fmt.Sprintf("Externo Lateral D/E: %vcm x %vcm - %v un\n\n", (comprimento + espessura), (altura - 0.1), (quantidade * 2)))
+	f.WriteString(fmt.Sprintf("Externo Lateral F: %.1fcm x %vcm - %v un\n\n", ((comprimento + espessura) - 0.1), (altura - 0.1), quantidade))
 }
